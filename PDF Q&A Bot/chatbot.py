@@ -12,6 +12,8 @@ load_dotenv()
 def load_and_split_pdf(pdf_path):
     loader = PyPDFLoader(pdf_path)
     pages = loader.load()
+
+    ### splitting doc intochunks.
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     docs = splitter.split_documents(pages)
     return docs
