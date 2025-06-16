@@ -12,6 +12,8 @@ load_dotenv()
 def load_and_split_pdf(pdf_path):
     loader = PyPDFLoader(pdf_path)
     pages = loader.load()
+
+    ### splitting doc intochunks.
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     docs = splitter.split_documents(pages)
     return docs
@@ -23,11 +25,11 @@ def create_vector_store(docs):
     vector_store.save_local("./faiss_db")
     return vector_store
 
-# Load Hugging Face LLM
-llm = HuggingFaceEndpoint(
+def my_llm():
+    llm = HuggingFaceEndpoint(
     repo_id="HuggingFaceH4/zephyr-7b-beta",
-    task="text-generation"
-)
+    task="text-generation")
+    return llm
 
 def get_qa_chain(vector_store, llm):
     chat_llm = ChatHuggingFace(llm=llm)
@@ -38,6 +40,7 @@ def get_qa_chain(vector_store, llm):
 def main():
     docs = load_and_split_pdf("D://RAG_Application//PDF Q&A Bot//Data//ML cheetsheet.pdf")
     vector_store = create_vector_store(docs)
+    llm=my_llm()
     qa_chain = get_qa_chain(vector_store, llm)
     user_query = "give me summary of linear regression algortihm?"
     response = qa_chain.run(user_query)
