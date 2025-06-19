@@ -1,3 +1,8 @@
 import langchain
 
-print(langchain.__version__)
+version=langchain.__version__
+if version >= '0.22.0':
+    print('greater')
+else:
+    print('smaller')
+ 
