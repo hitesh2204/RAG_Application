@@ -18,3 +18,27 @@ python-dotenv
 numpy
 scikit-learn
 streamlit
+
+# Core LangChain and Community Support
+langchain==0.2.1
+langchain-community==0.0.30
+langchain-core==0.2.1
+langchainhub==0.1.15
+
+# HuggingFace & LLM Support
+huggingface-hub==0.23.0
+transformers==4.41.2
+
+# Vector Database
+faiss-cpu==1.8.0
+
+# Embedding Model
+sentence-transformers==2.6.1
+
+# OCR & Image Handling
+pillow==10.3.0
+pytesseract==0.3.10
+
+# Misc
+tqdm
+python-dotenv
